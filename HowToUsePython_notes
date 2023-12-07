@@ -1,0 +1,92 @@
+
+# NOTE: IN PYTHON THE COMMENTS ARE MADE WIT '#'
+
+# To print a char just use:   
+name = 'Aldo'
+print('bla bla')
+print(name)
+
+# To print a variable use:
+x = 10
+print(x)
+
+# Boolean variable (use capital letter)
+check = False
+check = True
+
+# Getting an Input:
+number = input('insert number ') #NOTE: EVEN IF YOU ENTER A NUMBER, THE INPUT COMMAND STORE IT AS A STRING!!!!
+# Hence,
+number = int(number)    # for integer
+number = float(number)  # for a decimal number
+number = bool(number)   # for a boolean variable
+number = str(number)    # for a string
+
+# Compbining things to plot
+print('Age = ' + number)
+
+# NOTE: for mathematical operators, there is
+
+print(10 / 3)   # prints the decimal number
+print(10 // 6)  # prints the lower closest integer
+print(10 % 4)   # prints the remainder (il resto) of a division
+print(10 ** 3)  # prints the exponent 10^3
+print(10 ^3)    # is NOT the exponent!! it's the XOR logic
+
+
+# USEFUL FOR PROGRAMMING
+# In python to do 
+i = 0
+i = i + 1
+# you can do 
+i += 1      # and it's possible tu use also [ i -= 1 ] or [ i *= 5 ]
+
+# comparison operators: == , != , < , > , <= , >=
+
+# Logical expressio: it's possible to use both 
+# and = &
+# or = |
+# not = !
+
+# NOTE: when usinf if cycles : is needed after the condition
+
+if i < 4:
+    print('idk')
+elif i < 10:
+    print('IK')
+
+print('done')
+# NOTE: to end the if cycle press SHIFT + TAB and when the line is no indented anymore the cycle is finished (there's no end)
+
+# same thing with while and for
+
+while i < 10:
+    print('while')
+    i = 10
+
+for item in range(2, 10, 2):   # range from 2 to 10 (EXCLUDED) with a pass of 2
+    print(item)
+
+# the range(4) function returns a vector from 0 to 3 (4 numbers)
+# although if we print range(0,4) it shows: range(0,4) and not [0 1 2 3]
+
+
+# Using arrays:
+nu = [10, 9, 8, 7, 5, 4, 3, 2, 11]
+print(nu)
+nu.insert(4, 6) # inserts number 6 in position 4
+print(nu)
+nu.append(1)    # inserts 1 at the end of the array
+print(nu)
+nu.remove(11)   # it removes 11 from the array, whichever positions it has
+print(nu)
+print(nu[0])    # this prints the first number NOTE: IN PYTHON THE INDEX COUNTING STARTS FROM 0
+print(nu[-1])   # this prints the las number
+print(nu[0:5])  # prints all the number up to the 5th excluded, so 10 9 8 7 6
+print(11 in nu) # checks if the array has the number 11
+print(len(nu))  # prints the lenght of nu
+nu.clear()
+
+# NOTE: if you define vectors like
+n = (1,2,3,4)
+# you define a tuple, which cannot be changed
