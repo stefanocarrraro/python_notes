@@ -166,3 +166,34 @@ print(*a)       # prints the separate elements <=> unpack
 print('-----F STRINGS')
 c = f'Sususu su {40 - a[0]} and {400}' 
 print(c)
+
+# LIBRARY: show me an example on how ti use a library
+print('----library')
+import numpy as np  # imports the library numpy and calls it np so everytime we use np it's like using numpy
+# It's also possible to import only parts of the library
+# from numpy import random as rnd, array as ar    # imports only the random and array function of the library numpy   
+
+# to use a function of the library
+print(np.random.rand()) # prints a random number between 0 and 1
+
+# the most useful functions of numpy are:
+a = np.array([2,3,4,2])    # to create an array 
+print(a)
+a = np.arange(10)   # to create a range of numbers
+print(a)
+a = np.linspace(10, 20, 2) # to create a range of numbers with a specific step
+print(a)
+a = np.zeros(3)    # to create an array of zeros
+print(a)
+a = np.ones(3)     # to create an array of ones
+print(a)
+a = np.random.rand()  # to create a random number between 0 and 1
+print(a)
+a = np.random.randn() # to create a random number with a normal distribution
+print(a)
+a = np.random.randint(10, size=15)    # to create a random integer number
+print(a)
+a = np.random.choice(5, 3)     # to create a random number from a list
+print(a)
+
+#-----------------------------------------------------------------------------------------------------------
