@@ -197,3 +197,8 @@ a = np.random.choice(5, 3)     # to create a random number from a list
 print(a)
 
 #-----------------------------------------------------------------------------------------------------------
+
+import sys
+print(sys.executable)
+
+import pyomo.environ as pyo         # Import the Pyomo library

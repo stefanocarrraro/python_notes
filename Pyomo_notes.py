@@ -5,9 +5,11 @@
 # but the actual data values are not fixed at the time of model creation. Data is added later, after the abstract model is defined, 
 # and the model is then instantiated
 
+# Explanation here: https://pyomo.readthedocs.io/en/stable/pyomo_overview/simple_examples.html
+
 import pyomo.environ as pyo         # Import the Pyomo library
 
-model = pyo.AbstractModel()         # Abstract model created
+model = pyo.AbstractModel()         # Defining "model"as an Abstract model
 
 model.m = pyo.Param(within=pyo.NonNegativeIntegers)     # number of rows (non-negative integer parameter m)
 model.n = pyo.Param(within=pyo.NonNegativeIntegers)     # number of columns (non-negative integer parameter n)
@@ -34,10 +36,12 @@ def ax_constraint_rule(m, i):
 # the next line creates one constraint for each member of the set model.I
 model.AxbConstraint = pyo.Constraint(model.I, rule=ax_constraint_rule)
 
+# ----------------------------------------------------------------------------------------------------------------
+
 # Concrete models "ConcreteModel" are used to define concrete optimization models in Pyomo. Is used when all the 
 # parameters of the optimization problem are known at the time the model is defined.
 
-model = pyo.ConcreteModel()    # Concrete model
+model = pyo.ConcreteModel()    # defining "model" as a Concrete model
 model.x = pyo.Var([1,2], domain=pyo.NonNegativeReals)  # Variables x[1] and x[2] as non-negative real numbers
 model.OBJ = pyo.Objective(expr = 2*model.x[1] + 3*model.x[2])  # Objective function 2*x[1] + 3*x[2] to be minimized
 model.Constraint1 = pyo.Constraint(expr = 3*model.x[1] + 4*model.x[2] >= 1)    # Constraint 3*x[1] + 4*x[2] >= 1 
