@@ -139,7 +139,7 @@ def sum_and_mean (a , b, z=None):   # z=None menas that you don't have to specif
 print(sum_and_mean(a, b))
 r1, r2 = sum_and_mean(a,b)
 
-# LAMBDA: another way is to use the lambda function, which makes a simple and hidden function in a variable:
+# LAMBDA:  makes a simple and hidden function in a variable, you don't need to define the function with "def"
 print('----lambda')
 ah = lambda x,y:  x + y + 2         # means to add 2 to x and y together
 print(ah(3, 5))

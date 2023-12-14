@@ -82,6 +82,102 @@ model.L = model.A ^ model.D # exclusive-or
 model.M = model.A * model.D # cross-product
 
 # Pyomo provies some prefedined sets. Useful are:
-model.A = pyo.PositiveReals     # Valid also negative
-model.B = pyo.PositiveIntegers  # Valid also negative
-model.C = pyo.NonPositiveReals  # Valid also NonNegative and with Integers
+# model.A = pyo.PositiveReals     # Valid also negative
+# model.B = pyo.PositiveIntegers  # Valid also negative
+# model.C = pyo.NonPositiveReals  # Valid also NonNegative and with Integers
+
+
+# PARAMETERS: Parameters are used to define the coefficients of the objective function and constraints. they have a similar
+# concept of the stes For example, the following code snippet declares sets model.A and model.B, and then a parameter 
+# model.P that is indexed by model.A and model.B:
+# https://pyomo.readthedocs.io/en/stable/pyomo_modeling_components/Parameters.html
+
+# create a parameter that represents a square matrix with 9, 16, 25 on the main diagonal and zeros elsewhere
+model.A = pyo.RangeSet(1,3)
+v={}        
+v[1,1] = 9    
+v[2,2] = 16
+v[3,3] = 25
+model.S1 = pyo.Param(model.A, model.A, initialize=v, default=0) # default=0 is used to set the default value of the parameter
+
+
+# VARIABLES: Variables are used to define the decision variables of the optimization problem. They are indexed by sets.
+# https://pyomo.readthedocs.io/en/stable/pyomo_modeling_components/Variables.html
+
+model.LumberJack = pyo.Var(within=pyo.NonNegativeReals, bounds=(0, 6), initialize=1.5)
+
+# bounds = A function (or Python object) that gives a (lower,upper) bound pair for the variable
+# domain = A set that is a super-set of the values the variable can take on.
+# initialize = A function (or Python object) that gives a starting value for the variable; this is particularly important for non-linear models
+# It's also possible to do:
+model.LumberJack = 1.5
+# within = (synonym for domain)
+
+# OBJECTIVE FUNCTION: The objective function is used to define the objective function of the optimization problem.
+# https://pyomo.readthedocs.io/en/stable/pyomo_modeling_components/Objective.html
+
+#def ObjRule(model):
+#    return 2*model.x[1] + 3*model.x[2]
+#model.obj1 = pyo.Objective(rule=ObjRule)
+
+# or
+#def ObjRule(model):
+#    return pyo.summation(model.p, model.x) + model.y
+#model.obj2 = pyo.Objective(rule=ObjRule, sense=pyo.maximize)
+
+
+# CONSTRAINTS: Constraints are used to define the constraints of the optimization problem. They are indexed by sets.
+# https://pyomo.readthedocs.io/en/stable/pyomo_modeling_components/Constraints.html
+
+def ConstraintRule(model, i):
+    return sum(model.A[i,j]*model.x[j] for j in model.J) >= 0  # sum of a_ij*x_j >= 0 for all i in I
+
+ciao = pyo.Constraint(model.I, rule=ConstraintRule) # Defining the constraints as the function ax_constraint_rule defined above
+
+
+model.A = pyo.RangeSet(1, 10)
+model.c = pyo.Param(model.A)        # c is a 1D array indexed by set A [c_i] (objective function coefficients)
+model.d = pyo.Param()               # d is a 1D array 
+model.x = pyo.Var(model.A, domain=pyo.Boolean) # x is a 1D array indexed by set A [x_i] (decision variables)
+model.A.pprint()
+model.c.pprint()
+model.d.pprint()
+model.x.pprint()
+
+# There are some keywords for piecewise linear expressions:
+
+# pw_pts ={},[],()       A list of points that define the piecewise linear function
+
+# pw_repn = <option>     The representation of the piecewise linear function. Valid values are:
+#                           'INC' - incremental (delta) method
+#                           'DEC' - decremental (lambda) method
+#                           'CC' - convex combination model
+#                           'LINEAR' - the function is linear
+
+# pw_constr_type = <option>  The type of constraints used to define the piecewise linear function. Valid values are:
+#                               'EQ' - equality constraints
+#                               'LN' - lower boudary constraints
+#                               'UB' - upper boundary constraints
+
+# f_rule=f(model,i,i,...,x),[],{}   An object that returns a numeric value that is the range value corresponding to each piecewise domain point
+
+# warn_tol = <float>    A tolerance used to check for errors in the piecewise linear function definition. Default is 1e-6 (i.e. 6.4)
+
+# ESPRESSION OBJECTS: similar to the Param component but the underlying values can be numeric constants or Pyomo extressions:
+
+model = pyo.ConcreteModel()
+model.x = pyo.Var(initialize=1.0)
+def _e(m, i):
+    return m.x * i
+model.e = pyo.Expression([1, 2, 4], rule=_e)
+model.e.pprint()
+
+# or using defined expressions for other expressions:
+
+model = pyo.ConcreteModel()
+model.x = pyo.Var()
+# create a Pyomo expression
+e1 = model.x + 5
+# create another Pyomo expression
+# e1 is copied when generating e2
+e2 = e1 + model.x
