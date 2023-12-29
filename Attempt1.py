@@ -34,30 +34,6 @@ optimal.solve(model)
 model.display()
 print("\n\n\n\n\n\n")
 
-# ----------------------------------------------------------------------------
-
-# Abstract model
-
-import pyomo.environ as pyo
-
-modelA = pyo.AbstractModel()
-
-modelA.I = pyo.RangeSet(2)
-modelA.x = pyo.Var(modelA.I, domain=pyo.NonNegativeReals) # defining x1 and x2
-modelA.c = pyo.Param(modelA.I)                            # defining the OF coefficients
-modelA.b = pyo.Param(modelA.I)                            # defining the constraints coefficients
-
-def OBJ_FCN(model, i):
-    return pyo.summation(modelA.c[i] * modelA.x[i] for i in modelA.I)
-
-modelA.OF = pyo.Objective(rule=OBJ_FCN)
-
-def CONST(model, i):
-    return pyo.summation(modelA.b[i] * modelA.x[i] for i in modelA.I) >= 1
-
-modelA.const = pyo.Constraint(rule=CONST)
-
-instance = modelA.create_instance()
 
 
 

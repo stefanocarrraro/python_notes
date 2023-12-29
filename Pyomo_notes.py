@@ -261,7 +261,7 @@ instance2 = model.create_instance({None: {'I': {None: [4,5]}}})
 # ----------------------------------------------------------------------------------------------------------------
 
 # INITIALIZING DATA FOR AN ABSTRACT MODEL: https://pyomo.readthedocs.io/en/stable/working_abstractmodels/data/raw_dicts.html
-
+print("\n\n")
 m = pyo.AbstractModel()
 m.I = pyo.Set()                             # Set I is the set of rows (1, 2, ..., m)
 m.p = pyo.Param()                           # p is a 1D array (1 element)
@@ -275,7 +275,7 @@ data = {None: {
 }}
 i = m.create_instance(data)
 i.pprint()
-
+print("\n\n")
 
 # IMPORT DATA FROM OUTSIDE FILE: https://pyomo.readthedocs.io/en/stable/working_abstractmodels/data/datfiles.html 
 # A DataPortal object can load data in a consistent manner, and this data can be used to simply initialize all Set and Param components in a model.
