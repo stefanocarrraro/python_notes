@@ -392,7 +392,7 @@ print(pyo.value(scaled_model.scaled_x.lb))
 print(pyo.value(model.obj))
 print(pyo.value(scaled_model.scaled_obj))
 
-
-
+# cool video
+# https://www.youtube.com/watch?v=QbYd3DOf-T4
 
 
