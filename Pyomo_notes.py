@@ -261,7 +261,7 @@ instance2 = model.create_instance({None: {'I': {None: [4,5]}}})
 # ----------------------------------------------------------------------------------------------------------------
 
 # INITIALIZING DATA FOR AN ABSTRACT MODEL: https://pyomo.readthedocs.io/en/stable/working_abstractmodels/data/raw_dicts.html
-print("\n\n")
+print("\n\n Instance \n\n")
 m = pyo.AbstractModel()
 m.I = pyo.Set()                             # Set I is the set of rows (1, 2, ..., m)
 m.p = pyo.Param()                           # p is a 1D array (1 element)
