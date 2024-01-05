@@ -198,6 +198,27 @@ print(a)
 
 #-----------------------------------------------------------------------------------------------------------
 
+# PLOTTING GRAPHS AND MAPS:
+
+# PLOTTING GRAPHS:
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(0, 10, 100)     # creates a range of numbers from 0 to 10 with 100 steps
+y = np.sin(x)                   # creates a sinusoidal function with x
+plt.plot(x, y)                  # plots the graph
+plt.show()                      # shows the graph
+
+# PLOTTING MAPS:
+import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
+#plt.figure(figsize=(12,10))
+#cb = plt.colorbar()
+#cb.set_label("Percentage of Loading",fontsize=15)
+#cb.ax.tick_params(labelsize=15)
+#plt.savefig("out_case2.png")
+#plt.show()
+
 import sys
 print(sys.executable)
 
